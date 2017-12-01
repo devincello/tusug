@@ -12,6 +12,7 @@
   
   
   <body class="hold-transition skin-green sidebar-mini">
+
   <div class="wrapper">
 
   <header class="main-header">
@@ -33,15 +34,19 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           
+          <% if user_signed_in? %>
+          
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Iván Apellido</span>
+              <span class="hidden-xs"><%= current_user.nombre %></span>
+              <br />
+              <span class="hidden-xs"><%= current_user.email %></span>
           </li>
 
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-sign-out"></i></a>
+          <%= link_to "", destroy_user_session_path, :class => "fa fa-sign-out", method: :delete %>
+          <% end %>
           </li>
 
         </ul>
@@ -120,6 +125,7 @@
 
     <!-- Main content -->
     <section class="content">
+      <%= notice if notice %>
       <%= yield %>
     </section>
     <!-- /.content -->
